@@ -4,14 +4,9 @@ body {
   background-color: whitesmoke;
 }
 
-/* #root {
-  height: 100%;
-} */
-
 main {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   height: 100%;
   margin-top: 160px;
@@ -20,7 +15,6 @@ main {
 .game {
   height: 400px;
   width: 480px;
-  /* border: 1px solid red; */
   padding: 24px;
   border-radius: 8px;
   background-color: white;
