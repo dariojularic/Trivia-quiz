@@ -1,9 +1,16 @@
+import { useState } from "react"
 import "./Select.css"
 
 function Select(props) {
-  props.map(option => {
-    return (
-      <option key={id} value={option}></option>
-    )
-  })
+  const [selectedValue, setSelectedValue] = useState()
+
+  function handleChange(event) {
+    setSelectedValue(event.target.value)
+  }
+
+  return (
+    <select name="" id="">
+      {}
+    </select>
+  )
 }
