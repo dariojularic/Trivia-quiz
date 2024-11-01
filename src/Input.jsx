@@ -1,9 +1,9 @@
-import "./Input.css"
+// import "./Input.css"
 
-function Input() {
-  return (
-    <input type="number" min={10} max={20} />
-  )
-}
+// function Input() {
+//   return (
+//     <input type="number" min={10} max={20} />
+//   )
+// }
 
-export default Input;
+// export default Input;
