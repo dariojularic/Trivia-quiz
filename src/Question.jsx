@@ -10,11 +10,11 @@ function Question(props) {
       </div>
 
       <div className="question-container">
-        <p className="question"></p>
-        <p className="answer"></p>
-        <p className="answer"></p>
-        <p className="answer"></p>
-        <p className="answer"></p>
+        <p className="question">WQuestion</p>
+        <p className="answer">nas</p>
+        <p className="answer">fawfw</p>
+        <p className="answer">gwagaw</p>
+        <p className="answer">gawgawga</p>
       </div>
 
       <div>
