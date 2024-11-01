@@ -10,7 +10,7 @@ function Question(props) {
       </div>
 
       <div className="question-container">
-        <p className="question">WQuestion</p>
+        <h2 className="question">WQuestion a tawt awtawt taetawtat at a3t at 3a</h2>
         <p className="answer">nas</p>
         <p className="answer">fawfw</p>
         <p className="answer">gwagaw</p>

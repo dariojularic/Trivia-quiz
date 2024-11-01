@@ -5,7 +5,6 @@ function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
-  const [api, setApi] = useState(`https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`);
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value))
@@ -21,15 +20,30 @@ function Form() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    // console.log("questions", numOfQuestions, "category", category, "diff", difficulty)
-    // console.log(api)
-    setApi(`https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`)
-    console.log(api)
+    fetchData(numOfQuestions, category, difficulty)
+      .then(data => console.log(data))
+      .catch(error => {
+        console.error(error)
+      })
+  }
+
+  async function fetchData(questions, categ, diff) {
+    try {
+      const response = await fetch(`https://opentdb.com/api.php?amount=${questions}&category=${categ}&difficulty=${diff}`);
+      const data = await response.json();
+      return data
+    } catch (error) {
+      console.error("Error", error)
+    }
   }
 
   // ako je promise ispunjen, prikazi prvo pitanje pitanje
 
-
+  // napravit select componentu
+  // label componentu
+  // input komponentu
+  // button komponenta
+  // napravit funkciju fetchData(url)
   return (
     <div className="game">
       <h2>Quiz setup</h2>

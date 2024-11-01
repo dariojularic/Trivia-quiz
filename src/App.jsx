@@ -13,7 +13,7 @@ function App() {
       <Header/>
       <main>
         <Form/>
-        <Question/>
+        {/* <Question/> */}
       </main>
     </>
   )
