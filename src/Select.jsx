@@ -9,7 +9,7 @@ function Select(props) {
   }
 
   return (
-    <select name="" id="">
+    <select name="category" id="category">
       {}
     </select>
   )
