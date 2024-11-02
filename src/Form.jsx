@@ -10,8 +10,8 @@ function Form() {
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
 
-  const difficultyOptions = [{value: "easy", label: "Easy"}, {value: "medium", label: "Medium"}, {value: "hard", label: "Hard"}];
-  const categoryOptions = [{value: "21", label: "Sports"}, {value: "20", label: "Mithology"}, {value: "22", label: "Geography"}, {value: "25", label: "Art"}]
+  const difficultyOptions = [{id: 1, value: "easy", label: "Easy"}, {id: 2, value: "medium", label: "Medium"}, {id: 3, value: "hard", label: "Hard"}];
+  const categoryOptions = [{id: 1, value: "21", label: "Sports"}, {id: 2, value: "20", label: "Mithology"}, {id: 3, value: "22", label: "Geography"}, {id: 4, value: "25", label: "Art"}]
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value))
@@ -73,11 +73,12 @@ function Form() {
 
         <div className="difficulty-container">
           <label htmlFor="difficulty">Difficulty</label>
-          <select value={difficulty} name="difficulty" id="difficulty" onChange={handleDifficultyChange}>
+          <Select difficultyOptions={difficultyOptions} difficulty={difficulty} setDifficulty={setDifficulty} onChange={handleDifficultyChange}/>
+          {/* <select value={difficulty} name="difficulty" id="difficulty" onChange={handleDifficultyChange}>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
-          </select>
+          </select> */}
         </div>
 
         <button type="submit">Start playing!</button>
