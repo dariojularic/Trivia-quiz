@@ -1,10 +1,17 @@
 import "./Form.css"
 import { useState } from "react"
+import Button from "./Button"
+import Input from "./Input"
+import Label from "./Label"
+import Select from "./Select"
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
+
+  const difficultyOptions = [{value: "easy", label: "Easy"}, {value: "medium", label: "Medium"}, {value: "hard", label: "Hard"}];
+  const categoryOptions = [{value: "21", label: "Sports"}, {value: "20", label: "Mithology"}, {value: "22", label: "Geography"}, {value: "25", label: "Art"}]
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value))

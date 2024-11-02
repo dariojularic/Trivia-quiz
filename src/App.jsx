@@ -7,7 +7,6 @@ import Question from './Question'
 
 function App() {
 
-
   return (
     <>
       <Header/>
