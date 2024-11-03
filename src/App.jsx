@@ -1,9 +1,7 @@
 import "./App.css";
 import Header from "./Header";
-// import Category from "./Category"
-// import NumOfQuestions from "./NumOfQuestions"
 import Form from "./Form";
-import Question from "./Question";
+// import Question from "./Question";
 
 function App() {
   return (

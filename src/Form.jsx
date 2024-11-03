@@ -5,13 +5,14 @@ import Input from "./Input";
 import Label from "./Label";
 import Select from "./Select";
 import Question from "./Question";
+import Loading from "./Loading";
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
   const [quizQuestions, setQuizQuestions] = useState(null);
-  const [questionsReady, setQuestionsReady] = useState(false);
+  const [questionsReady, setQuestionsReady] = useState(null);
   const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`;
 
   // state za loading
@@ -50,8 +51,8 @@ function Form() {
       .then((data) => {
         setQuizQuestions(data);
         setQuestionsReady(true);
-        console.log("data", data);
-        console.log("quizQuestions", quizQuestions);
+        // console.log("data", data);
+        // console.log("quizQuestions", quizQuestions);
       })
       // .then((data) => setQuizQuestions(data))
       .catch((error) => {
@@ -61,13 +62,20 @@ function Form() {
 
   async function fetchData() {
     try {
+      setQuestionsReady(false);
       const response = await fetch(baseUrl);
+      // console.log(response)
       const data = await response.json();
+      // console.log(data)
+      console.log(questionsReady);
+      // setQuestionsReady(true)
       return data;
     } catch (error) {
       console.error("Error", error);
     }
   }
+
+  if (questionsReady === false) return <Loading />;
 
   // ako je promise ispunjen, prikazi prvo pitanje pitanje
   return (

@@ -2,7 +2,7 @@ import "./Question.css"
 
 function Question(props) {
   const {questions} = props;
-  console.log(questions.results)
+  // console.log(questions.results)
   return (
     <div className="question-box">
       <div className="number-of-answers">
