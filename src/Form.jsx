@@ -4,16 +4,20 @@ import Button from "./Button";
 import Input from "./Input";
 import Label from "./Label";
 import Select from "./Select";
-import PropTypes from "prop-types";
+import Question from "./Question";
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
+  const [quizQuestions, setQuizQuestions] = useState(null);
+  const [questionsReady, setQuestionsReady] = useState(false);
   const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`;
+
   // state za loading
   // state za pitanja
 
+  // kako funkcionira event kao argument?
   // zasto promjena statea kasni i kako rijesit taj problem? useEffect??
 
   const difficultyOptions = [
@@ -30,33 +34,34 @@ function Form() {
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value));
-    console.log(numOfQuestions);
   }
 
   function handleCategoryChange(event) {
     setCategory(event.target.value);
-    console.log(category);
   }
 
   function handleDifficultyChange(event) {
     setDifficulty(event.target.value);
-    console.log(difficulty);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetchData(numOfQuestions, category, difficulty)
-      .then((data) => console.log(data))
+    fetchData()
+      .then((data) => {
+        setQuizQuestions(data);
+        setQuestionsReady(true);
+        console.log("data", data);
+        console.log("quizQuestions", quizQuestions);
+      })
+      // .then((data) => setQuizQuestions(data))
       .catch((error) => {
         console.error(error);
       });
   }
 
-  async function fetchData(questions, categ, diff) {
+  async function fetchData() {
     try {
-      const response = await fetch(
-        `https://opentdb.com/api.php?amount=${questions}&category=${categ}&difficulty=${diff}`
-      );
+      const response = await fetch(baseUrl);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -65,68 +70,60 @@ function Form() {
   }
 
   // ako je promise ispunjen, prikazi prvo pitanje pitanje
-  // napravit select componentu
-  // label componentu
-  // input komponentu
-  // button komponenta
-  // napravit funkciju fetchData(url)
   return (
-    <div className="game">
-      <h2>Quiz setup</h2>
+    <>
+      {!questionsReady ? (
+        <div className="gameSetup">
+          <h2>Quiz setup</h2>
 
-      <form
-        onSubmit={handleSubmit}
-        method="get"
-        action={`https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`}
-      >
-        <div className="num-of-questions-container">
-          {/* <label htmlFor="number-of-questions">Number Of Questions</label> */}
-          <Label
-            forSelect="number-of-questions"
-            labelValue="Number Of Questions"
-          />
-          <Input
-            type="number"
-            id="number-of-questions"
-            name="number-of-questions"
-            value={numOfQuestions}
-            handleChange={handleNumOfQuestionsChange}
-          />
-          {/* <input
-            id="number-of-questions"
-            name="number-of-questions"
-            type="number"
-            value={numOfQuestions}
-            min={10}
-            max={20}
-            onChange={handleNumOfQuestionsChange}
-          /> */}
+          <form
+            onSubmit={handleSubmit}
+            method="get"
+            action={`https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`}
+          >
+            <div className="num-of-questions-container">
+              <Label
+                forSelect="number-of-questions"
+                labelValue="Number Of Questions"
+              />
+              <Input
+                type="number"
+                id="number-of-questions"
+                name="number-of-questions"
+                value={numOfQuestions}
+                handleChange={handleNumOfQuestionsChange}
+              />
+            </div>
+
+            <div className="category-container">
+              <Label forSelect="category" labelValue="Category" />
+              <Select
+                options={categoryOptions}
+                id="category"
+                name="category"
+                handleChange={handleDifficultyChange}
+              />
+            </div>
+
+            <div className="difficulty-container">
+              <Label forSelect="difficulty" labelValue="Difficulty" />
+              <Select
+                options={difficultyOptions}
+                id="difficulty"
+                name="difficulty"
+                handleChange={handleCategoryChange}
+              />
+            </div>
+
+            <Button value="Start playing!" type="submit" />
+          </form>
         </div>
-
-        <div className="category-container">
-          <Label forSelect="difficulty" labelValue="Difficulty" />
-          <Select
-            options={difficultyOptions}
-            id="difficulty"
-            name="difficulty"
-            handleChange={handleDifficultyChange}
-          />
+      ) : (
+        <div>
+          <Question questions={quizQuestions} />
         </div>
-
-        <div className="difficulty-container">
-          <Label forSelect="category" labelValue="Category" />
-          <Select
-            options={categoryOptions}
-            id="category"
-            name="category"
-            handleChange={handleCategoryChange}
-          />
-        </div>
-
-        <Button value="Start playing!" type="submit" />
-        <button type="submit">Start playing!</button>
-      </form>
-    </div>
+      )}
+    </>
   );
 }
 
