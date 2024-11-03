@@ -1,21 +1,20 @@
-import './App.css'
-import Header from "./Header"
+import "./App.css";
+import Header from "./Header";
 // import Category from "./Category"
 // import NumOfQuestions from "./NumOfQuestions"
-import Form from "./Form"
-import Question from './Question'
+import Form from "./Form";
+import Question from "./Question";
 
 function App() {
-
   return (
     <>
-      <Header/>
+      <Header />
       <main>
-        <Form/>
+        <Form />
         {/* <Question/> */}
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

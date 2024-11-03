@@ -4,17 +4,17 @@ import Button from "./Button";
 import Input from "./Input";
 import Label from "./Label";
 import Select from "./Select";
-import PropTypes from "prop-types"
-
+import PropTypes from "prop-types";
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
   const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`;
-
   // state za loading
   // state za pitanja
+
+  // zasto promjena statea kasni i kako rijesit taj problem? useEffect??
 
   const difficultyOptions = [
     { id: 1, value: "easy", label: "Easy" },
@@ -30,14 +30,17 @@ function Form() {
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value));
+    console.log(numOfQuestions);
   }
 
   function handleCategoryChange(event) {
     setCategory(event.target.value);
+    console.log(category);
   }
 
   function handleDifficultyChange(event) {
     setDifficulty(event.target.value);
+    console.log(difficulty);
   }
 
   function handleSubmit(event) {
@@ -77,8 +80,19 @@ function Form() {
         action={`https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`}
       >
         <div className="num-of-questions-container">
-          <label htmlFor="number-of-questions">Number Of Questions</label>
-          <input
+          {/* <label htmlFor="number-of-questions">Number Of Questions</label> */}
+          <Label
+            forSelect="number-of-questions"
+            labelValue="Number Of Questions"
+          />
+          <Input
+            type="number"
+            id="number-of-questions"
+            name="number-of-questions"
+            value={numOfQuestions}
+            handleChange={handleNumOfQuestionsChange}
+          />
+          {/* <input
             id="number-of-questions"
             name="number-of-questions"
             type="number"
@@ -86,31 +100,30 @@ function Form() {
             min={10}
             max={20}
             onChange={handleNumOfQuestionsChange}
-          />
+          /> */}
         </div>
 
         <div className="category-container">
-          {/* <label htmlFor="category">Category</label>
-          <select
-            value={category}
-            name="category"
-            id="category"
-            onChange={handleCategoryChange}
-          >
-            <option value="21">Sports</option>
-            <option value="20">Mithology</option>
-            <option value="22">Geography</option>
-            <option value="25">Art</option>
-          </select> */}
-          <Label forSelect="difficulty" labelValue="Difficulty"/>
-          <Select options={difficultyOptions} id="difficulty" name="difficulty" />
+          <Label forSelect="difficulty" labelValue="Difficulty" />
+          <Select
+            options={difficultyOptions}
+            id="difficulty"
+            name="difficulty"
+            handleChange={handleDifficultyChange}
+          />
         </div>
 
         <div className="difficulty-container">
           <Label forSelect="category" labelValue="Category" />
-          <Select options={categoryOptions} id="category" name="category" />
+          <Select
+            options={categoryOptions}
+            id="category"
+            name="category"
+            handleChange={handleCategoryChange}
+          />
         </div>
 
+        <Button value="Start playing!" type="submit" />
         <button type="submit">Start playing!</button>
       </form>
     </div>
