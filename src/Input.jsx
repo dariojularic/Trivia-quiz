@@ -1,4 +1,6 @@
 import "./Input.css"
+import PropTypes from "prop-types"
+
 
 function Input() {
   return (

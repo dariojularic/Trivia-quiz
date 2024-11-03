@@ -4,12 +4,15 @@ import Button from "./Button";
 import Input from "./Input";
 import Label from "./Label";
 import Select from "./Select";
+import PropTypes from "prop-types"
+
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
   const [category, setCategory] = useState("22");
   const [difficulty, setDifficulty] = useState("easy");
-  // const baseUrl
+  const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`;
+
   // state za loading
   // state za pitanja
 
