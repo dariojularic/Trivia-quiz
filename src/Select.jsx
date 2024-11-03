@@ -1,14 +1,11 @@
 import { useState } from "react"
 import "./Select.css"
+import PropTypes from "prop-types"
+
 
 function Select(props) {
-  console.log("props", props)
-  const {id, difficulty, difficultyOptions, setDifficulty} = props
+  const {options, id, name} = props
 
-
-  // console.log(difficulty)
-  // console.log(difficultyOptions)
-  // console.log(setDifficulty)
   const [selectedValue, setSelectedValue] = useState()
 
   function handleChange(event) {
@@ -16,12 +13,18 @@ function Select(props) {
   }
 
   return (
-    <select defaultValue={difficulty} name="difficulty" id="difficulty" onChange={setDifficulty()}>
-      {difficultyOptions.map(option => {
-        return <option key={id} value={option.value}>{option.label}</option>
+    <select name={name} id={id} >
+      {options.map(option => {
+        return <option key={option.id} value={option.value}>{option.label}</option>
       })}
     </select>
   )
+}
+
+Select.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.array
 }
 
 export default Select;

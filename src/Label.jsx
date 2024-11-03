@@ -1,9 +1,17 @@
 import "./Label.css"
+import PropTypes from "prop-types"
 
-function Label() {
+function Label(props) {
+  const {forSelect, labelValue} = props
+
   return (
-    <label htmlFor=""></label>
+    <label htmlFor={forSelect}>{labelValue}</label>
   )
+}
+
+Label.propTypes = {
+  forSelect: PropTypes.string,
+  labelValue: PropTypes.string
 }
 
 export default Label;
