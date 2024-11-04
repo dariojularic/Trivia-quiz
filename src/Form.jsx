@@ -13,11 +13,12 @@ function Form() {
   const [difficulty, setDifficulty] = useState("easy");
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
-  const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`;
+  const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`;
 
   // state za loading
   // state za pitanja
 
+  // sta ako ne proslijedim neki prop??
   // kako funkcionira event kao argument?
   // zasto promjena statea kasni i kako rijesit taj problem? useEffect??
 
@@ -67,8 +68,6 @@ function Form() {
       // console.log(response)
       const data = await response.json();
       // console.log(data)
-      console.log(questionsReady);
-      // setQuestionsReady(true)
       return data;
     } catch (error) {
       console.error("Error", error);
@@ -128,7 +127,7 @@ function Form() {
         </div>
       ) : (
         <div>
-          <Question questions={quizQuestions} />
+          <Question questions={quizQuestions} numOfQuestions={numOfQuestions}/>
         </div>
       )}
     </>
