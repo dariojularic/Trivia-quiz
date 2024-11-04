@@ -13,10 +13,17 @@ function Question(props) {
     questions.results[activeIndex].correct_answer
   );
 
-  function handleClick(event) {
-    console.log("my answer", event.target)
-    console.log("correct answer", questions.results[activeIndex].correct_answer)
-    if (event.target.value === questions.results[activeIndex].correct_answer) console.log("correct")
+  function handleClick(event, data) {
+    console.log("my answer", event.target.textContent);
+    console.log("data", data);
+    console.log(
+      "correct answer",
+      questions.results[activeIndex].correct_answer
+    );
+    if (
+      event.target.textContent === questions.results[activeIndex].correct_answer
+    )
+      console.log("correct");
   }
 
   return (
@@ -29,14 +36,11 @@ function Question(props) {
 
       <div className="question-container">
         <h2 className="question">{allQuestions[activeIndex].question}</h2>
-        {allAnswers.map((answer, index) => {
+        {allAnswers.map((answer) => {
           return (
-            <>
-              {/* {console.log(index)} */}
-              <p key={index} value={answer} className="answer" onClick={handleClick}>
-                {answer}
-              </p>
-            </>
+            <p key={answer} className="answer" onClick={handleClick}>
+              {answer}
+            </p>
           );
         })}
       </div>

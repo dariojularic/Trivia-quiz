@@ -19,7 +19,6 @@ function Form() {
   // state za pitanja
 
   // sta ako ne proslijedim neki prop??
-  // kako funkcionira event kao argument?
   // zasto promjena statea kasni i kako rijesit taj problem? useEffect??
 
   const difficultyOptions = [
@@ -45,6 +44,11 @@ function Form() {
   function handleDifficultyChange(event) {
     setDifficulty(event.target.value);
   }
+
+  // function handler(e) {
+  //   console.log(e)
+  // }
+  // button.addEventListener("click", handler)
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -76,7 +80,6 @@ function Form() {
 
   if (questionsReady === false) return <Loading />;
 
-  // ako je promise ispunjen, prikazi prvo pitanje pitanje
   return (
     <>
       {!questionsReady ? (
@@ -127,7 +130,7 @@ function Form() {
         </div>
       ) : (
         <div>
-          <Question questions={quizQuestions} numOfQuestions={numOfQuestions}/>
+          <Question questions={quizQuestions} numOfQuestions={numOfQuestions} />
         </div>
       )}
     </>
