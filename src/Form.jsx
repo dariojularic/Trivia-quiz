@@ -129,6 +129,7 @@ function Form() {
             question={quizQuestions.results[activeIndex].question}
             setActiveIndex={setActiveIndex}
             activeIndex={activeIndex}
+            numOfQuestions={numOfQuestions}
           />
         </div>
       )}

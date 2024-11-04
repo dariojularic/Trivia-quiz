@@ -1,7 +1,6 @@
 import "./App.css";
 import Header from "./Header";
 import Form from "./Form";
-// import Question from "./Question";
 
 function App() {
   return (
@@ -9,7 +8,6 @@ function App() {
       <Header />
       <main>
         <Form />
-        {/* <Question/> */}
       </main>
     </>
   );
