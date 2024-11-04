@@ -4,38 +4,35 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 function Question(props) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0)
+  const {
+    correctAnswer,
+    incorrectAnswers,
+    question,
+    activeIndex,
+    setActiveIndex,
+  } = props;
+  const allAnswers = incorrectAnswers.concat(correctAnswer);
+  function handleClick(event) {
+    setActiveIndex((prev) => prev + 1);
+    if (event.target.textContent === correctAnswer) {
+      // console.log("correct");
+      setNumOfCorrectAnswers(prev => prev + 1)
+    }
 
-  const { questions } = props;
-  // console.log(questions)
-  const allQuestions = questions.results;
-  const allAnswers = questions.results[activeIndex].incorrect_answers.concat(
-    questions.results[activeIndex].correct_answer
-  );
-
-  function handleClick(event, data) {
-    console.log("my answer", event.target.textContent);
-    console.log("data", data);
-    console.log(
-      "correct answer",
-      questions.results[activeIndex].correct_answer
-    );
-    if (
-      event.target.textContent === questions.results[activeIndex].correct_answer
-    )
-      console.log("correct");
+    
   }
 
   return (
     <div className="question-box">
       <div className="number-of-answers">
         <p>
-          Correct answers:{activeIndex} /{questions.results.length}
+          Correct answers: {numOfCorrectAnswers} /{activeIndex}
         </p>
       </div>
 
       <div className="question-container">
-        <h2 className="question">{allQuestions[activeIndex].question}</h2>
+        <h2 className="question">{question}</h2>
         {allAnswers.map((answer) => {
           return (
             <p key={answer} className="answer" onClick={handleClick}>
@@ -51,8 +48,13 @@ function Question(props) {
 }
 
 Question.propTypes = {
-  questions: PropTypes.object,
-  length: PropTypes.func,
+  correctAnswer: PropTypes.string,
+  incorrectAnswers: PropTypes.array,
+  numOfQuestions: PropTypes.number,
+  question: PropTypes.string,
+  activeIndex: PropTypes.number,
+  setActiveIndex: PropTypes.func,
+  numOfCorrectAnswers: PropTypes.number,
 };
 
 export default Question;

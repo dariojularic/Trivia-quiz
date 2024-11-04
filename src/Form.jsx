@@ -13,6 +13,7 @@ function Form() {
   const [difficulty, setDifficulty] = useState("easy");
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`;
 
   // state za loading
@@ -45,21 +46,13 @@ function Form() {
     setDifficulty(event.target.value);
   }
 
-  // function handler(e) {
-  //   console.log(e)
-  // }
-  // button.addEventListener("click", handler)
-
   function handleSubmit(event) {
     event.preventDefault();
     fetchData()
       .then((data) => {
         setQuizQuestions(data);
         setQuestionsReady(true);
-        // console.log("data", data);
-        // console.log("quizQuestions", quizQuestions);
       })
-      // .then((data) => setQuizQuestions(data))
       .catch((error) => {
         console.error(error);
       });
@@ -69,9 +62,7 @@ function Form() {
     try {
       setQuestionsReady(false);
       const response = await fetch(baseUrl);
-      // console.log(response)
       const data = await response.json();
-      // console.log(data)
       return data;
     } catch (error) {
       console.error("Error", error);
@@ -130,7 +121,15 @@ function Form() {
         </div>
       ) : (
         <div>
-          <Question questions={quizQuestions} numOfQuestions={numOfQuestions} />
+          <Question
+            correctAnswer={quizQuestions.results[activeIndex].correct_answer}
+            incorrectAnswers={
+              quizQuestions.results[activeIndex].incorrect_answers
+            }
+            question={quizQuestions.results[activeIndex].question}
+            setActiveIndex={setActiveIndex}
+            activeIndex={activeIndex}
+          />
         </div>
       )}
     </>
