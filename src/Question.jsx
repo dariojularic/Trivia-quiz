@@ -5,11 +5,19 @@ import { useState } from "react";
 
 function Question(props) {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const { questions } = props;
+  // console.log(questions)
   const allQuestions = questions.results;
   const allAnswers = questions.results[activeIndex].incorrect_answers.concat(
     questions.results[activeIndex].correct_answer
   );
+
+  function handleClick(event) {
+    console.log("my answer", event.target)
+    console.log("correct answer", questions.results[activeIndex].correct_answer)
+    if (event.target.value === questions.results[activeIndex].correct_answer) console.log("correct")
+  }
 
   return (
     <div className="question-box">
@@ -24,8 +32,8 @@ function Question(props) {
         {allAnswers.map((answer, index) => {
           return (
             <>
-              {console.log("answer index", index)}
-              <p key={index} className="answer">
+              {/* {console.log(index)} */}
+              <p key={index} value={answer} className="answer" onClick={handleClick}>
                 {answer}
               </p>
             </>
