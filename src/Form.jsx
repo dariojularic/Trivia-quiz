@@ -9,7 +9,7 @@ import Loading from "./Loading";
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
-  const [category, setCategory] = useState("22");
+  const [category, setCategory] = useState("21");
   const [difficulty, setDifficulty] = useState("easy");
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
@@ -40,16 +40,19 @@ function Form() {
 
   function handleCategoryChange(event) {
     setCategory(event.target.value);
+    console.log(category)
   }
 
   function handleDifficultyChange(event) {
     setDifficulty(event.target.value);
+    console.log(difficulty)
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     fetchData()
       .then((data) => {
+        console.log(data)
         setQuizQuestions(data);
         setQuestionsReady(true);
       })
@@ -102,7 +105,7 @@ function Form() {
                 options={categoryOptions}
                 id="category"
                 name="category"
-                handleChange={handleDifficultyChange}
+                handleChange={handleCategoryChange}
               />
             </div>
 
@@ -112,7 +115,7 @@ function Form() {
                 options={difficultyOptions}
                 id="difficulty"
                 name="difficulty"
-                handleChange={handleCategoryChange}
+                handleChange={handleDifficultyChange}
               />
             </div>
 
