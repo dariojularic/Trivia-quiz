@@ -15,7 +15,7 @@ form {
 label {
   margin-bottom: 8px;
 }
-/* 
+
 input, select {
   padding: 8px;
   font-size: 16px;
@@ -33,7 +33,7 @@ button {
   font-size: 18px;
   padding: 4px;
   cursor: pointer;
-} */
+}
 
 button:hover {
   background-color: #e8940d;
