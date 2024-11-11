@@ -17,17 +17,30 @@ function Question(props) {
   const allAnswers = incorrectAnswers.concat(correctAnswer);
 
   function handleClick(event) {
-    setActiveIndex((prev) => prev + 1);
-
-    if (numOfQuestions === activeIndex + 1) {
-      console.log("game over");
-      console.log(activeIndex);
-      return <GameOver />;
-    }
-
     if (correctAnswer && event.target.textContent === correctAnswer) {
+      // console.log("event,target,textContetn", event.target.textContent);
       setNumOfCorrectAnswers((prev) => prev + 1);
     }
+
+    if (activeIndex + 1 === numOfQuestions) {
+      console.log("finito");
+      return (
+        <GameOver
+          numOfQuestions={numOfQuestions}
+          numOfCorrectAnswers={numOfCorrectAnswers}
+        />
+      );
+    } else {
+      setActiveIndex((prev) => prev + 1);
+    }
+    // ako sam stigao do kraja, nemoj se povecat nego prikazi modal za GameOver
+
+    // koristit portal za GameOver
+
+    // if (numOfQuestions < activeIndex + 1) {
+    //   // console.log("game over");
+    //   // console.log(activeIndex);
+    // }
   }
 
   return (

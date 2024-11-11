@@ -15,6 +15,11 @@ function Form() {
   const [questionsReady, setQuestionsReady] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`;
+  // const baseUrl = `https://opentdb.com/api.php?`; ovaj je basa
+
+  // baseUrl, i konstante prebacit u posebni file constants.js i onda ih importat
+
+  // const activeQuestion = ?
 
   // state za loading
   // state za pitanja
@@ -40,19 +45,19 @@ function Form() {
 
   function handleCategoryChange(event) {
     setCategory(event.target.value);
-    console.log(category)
+    console.log(category);
   }
 
   function handleDifficultyChange(event) {
     setDifficulty(event.target.value);
-    console.log(difficulty)
+    console.log(difficulty);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     fetchData()
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setQuizQuestions(data);
         setQuestionsReady(true);
       })
@@ -73,6 +78,8 @@ function Form() {
   }
 
   if (questionsReady === false) return <Loading />;
+
+  // jel ovdje ide GameOver komponenta??
 
   return (
     <>

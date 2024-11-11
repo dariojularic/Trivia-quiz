@@ -1,14 +1,24 @@
-import "./GameOver.css"
+import PropTypes from "prop-types";
+import "./GameOver.css";
 
 function GameOver(props) {
-  // const {} = props
+  const { numOfCorrectAnswers, numOfQuestions } = props;
 
   return (
-    <div className="container">
-      <h3>Game Over</h3>
-      <p> You answered </p>
+    <div className="game-over-container">
+      {console.log("agagagagaaga")}
+      <h3 className="game-over-header">Game Over</h3>
+      <p>
+        You answered {numOfCorrectAnswers} / {numOfQuestions} or{" "}
+        {(numOfCorrectAnswers / numOfQuestions) * 100}%{" "}
+      </p>
     </div>
-  )
+  );
 }
+
+GameOver.propTypes = {
+  numOfCorrectAnswers: PropTypes.number,
+  numOfQuestions: PropTypes.number,
+};
 
 export default GameOver;
