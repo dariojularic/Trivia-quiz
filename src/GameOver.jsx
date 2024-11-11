@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import "./GameOver.css";
+import ReactDom from "react-dom";
 
 function GameOver(props) {
   const { numOfCorrectAnswers, numOfQuestions } = props;
 
-  return (
+  return ReactDom.createPortal(
     <div className="game-over-container">
       {console.log("agagagagaaga")}
       <h3 className="game-over-header">Game Over</h3>
@@ -12,7 +13,8 @@ function GameOver(props) {
         You answered {numOfCorrectAnswers} / {numOfQuestions} or{" "}
         {(numOfCorrectAnswers / numOfQuestions) * 100}%{" "}
       </p>
-    </div>
+    </div>,
+    document.getElementById("root")
   );
 }
 
