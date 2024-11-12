@@ -7,13 +7,13 @@
   padding: 24px;
 }
 
-  .question {
+  /* .question {
     font-size: 32px;
     font-weight: 700;
     display: flex;
     justify-content: center;
     text-align: center;
-  }
+  } */
 
 .answer {
   background-color: #14213d;
