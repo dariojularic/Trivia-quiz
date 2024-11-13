@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.answer {
+/* .answer {
   background-color: #14213d;
   color: #ffffff;
   text-align: center;
@@ -23,7 +23,7 @@
   padding: 8px;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 .answer:hover {
   background-color: #365eb4;
