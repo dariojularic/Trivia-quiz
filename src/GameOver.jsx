@@ -14,7 +14,7 @@ function GameOver(props) {
         {(numOfCorrectAnswers / numOfQuestions) * 100}%{" "}
       </p>
     </div>,
-    document.getElementById("root")
+    document.getElementsByName("main")
   );
 }
 
