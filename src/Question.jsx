@@ -44,26 +44,29 @@ function Question(props) {
   }
 
   return (
-    <div className="question-box">
-      <div className="number-of-answers">
-        <p>
-          Correct answers: {numOfCorrectAnswers} / {activeIndex}
-        </p>
-      </div>
+    <>
+    <div className="portal"></div>
+      <div className="question-box">
+        <div className="number-of-answers">
+          <p>
+            Correct answers: {numOfCorrectAnswers} / {activeIndex}
+          </p>
+        </div>
 
-      <div className="question-container">
-        <h2 className="question">{question}</h2>
-        {allAnswers.map((answer) => {
-          return (
-            <p key={answer} className="answer" onClick={handleClick}>
-              {answer}
-            </p>
-          );
-        })}
-      </div>
+        <div className="question-container">
+          <h2 className="question">{question}</h2>
+          {allAnswers.map((answer) => {
+            return (
+              <p key={answer} className="answer" onClick={handleClick}>
+                {answer}
+              </p>
+            );
+          })}
+        </div>
 
-      <Button value="Next question" type="submit" />
-    </div>
+        <Button value="Next question" type="submit" />
+      </div>
+    </>
   );
 }
 
