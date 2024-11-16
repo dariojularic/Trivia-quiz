@@ -34,7 +34,7 @@
   justify-content: end;
 }
 
-
+/*
 .game-over-container {
   position: absolute;
   top: 50%;
@@ -50,7 +50,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
+} */
 
 
 .overlay {
