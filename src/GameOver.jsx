@@ -9,7 +9,6 @@ function GameOver(props) {
     <>
       <div className="overlay"></div>
       <div className="game-over-container">
-        {console.log("agagagagaaga")}
         <h3 className="game-over-header">Game Over</h3>
         <p>
           You answered {numOfCorrectAnswers} / {numOfQuestions} or{" "}
@@ -17,7 +16,7 @@ function GameOver(props) {
         </p>
       </div>
     </>,
-    document.getElementsByClassName("portal")
+    document.getElementById("portal")
   );
 }
 

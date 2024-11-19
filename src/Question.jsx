@@ -1,33 +1,35 @@
 import "./Question.css";
 import Button from "./Button";
 import PropTypes from "prop-types";
-import { useState } from "react";
+// import { useState } from "react";
 // import GameOver from "./GameOver";
 
 function Question(props) {
-  const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
+  // const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
   const {
     correctAnswer,
     incorrectAnswers,
     question,
     activeIndex,
-    setActiveIndex,
-    numOfQuestions,
+    // setActiveIndex,
+    // numOfQuestions,
+    handleClickAnswer,
+    numOfCorrectAnswers,
+    setNumOfCorrectAnswers,
   } = props;
   const allAnswers = incorrectAnswers.concat(correctAnswer);
 
   function handleClick(event) {
+    console.log(event)
     if (correctAnswer && event.target.textContent === correctAnswer) {
       setNumOfCorrectAnswers((prev) => prev + 1);
     }
 
-    if (activeIndex + 1 === numOfQuestions) {
-      console.log("finito");
-      // gameOver = true
-    } else {
-      setActiveIndex((prev) => prev + 1);
-    }
-    // ako sam stigao do kraja, nemoj se povecat nego prikazi modal za GameOver
+    // if (activeIndex + 1 === numOfQuestions) {
+    //   console.log("finito");
+    // } else {
+    //   setActiveIndex((prev) => prev + 1);
+    // }
   }
 
   return (
@@ -44,7 +46,15 @@ function Question(props) {
           <h2 className="question">{question}</h2>
           {allAnswers.map((answer) => {
             return (
-              <p key={answer} className="answer" onClick={handleClick}>
+              <p
+                key={answer}
+                className="answer"
+                // zasto ovdje mora ic event kao argument?
+                onClick={(event) => {
+                  handleClick(event);
+                  handleClickAnswer(event);
+                }}
+              >
                 {answer}
               </p>
             );
@@ -65,6 +75,8 @@ Question.propTypes = {
   activeIndex: PropTypes.number,
   setActiveIndex: PropTypes.func,
   numOfCorrectAnswers: PropTypes.number,
+  setNumOfCorrectAnswers: PropTypes.func,
+  handleClickAnswer: PropTypes.func,
 };
 
 export default Question;

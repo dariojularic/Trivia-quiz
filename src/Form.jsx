@@ -17,11 +17,25 @@ function Form() {
   const [questionsReady, setQuestionsReady] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
   // gameOver = false
-  // const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`;
   // const activeQuestion = ?
 
   // tu ide handleGameOver function
+
+  function handleClickAnswer() {
+    // if (correctAnswer && event.target.textContent === correctAnswer) {
+    //   setNumOfCorrectAnswers((prev) => prev + 1);
+    // }
+
+    if (activeIndex + 1 === numOfQuestions) {
+      console.log("finito");
+      setGameOver(true)
+    } else {
+      setActiveIndex((prev) => prev + 1);
+    }
+    // ako sam stigao do kraja, nemoj se povecat nego prikazi modal za GameOver
+  }
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value));
@@ -134,6 +148,9 @@ function Form() {
             setActiveIndex={setActiveIndex}
             activeIndex={activeIndex}
             numOfQuestions={numOfQuestions}
+            handleClickAnswer={handleClickAnswer}
+            numOfCorrectAnswers={numOfCorrectAnswers}
+            setNumOfCorrectAnswers={setNumOfCorrectAnswers}
           />
         </div>
       )}
