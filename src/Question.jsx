@@ -1,18 +1,13 @@
 import "./Question.css";
 import Button from "./Button";
 import PropTypes from "prop-types";
-// import { useState } from "react";
-// import GameOver from "./GameOver";
 
 function Question(props) {
-  // const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
   const {
     correctAnswer,
     incorrectAnswers,
     question,
     activeIndex,
-    // setActiveIndex,
-    // numOfQuestions,
     handleClickAnswer,
     numOfCorrectAnswers,
     setNumOfCorrectAnswers,
@@ -20,16 +15,9 @@ function Question(props) {
   const allAnswers = incorrectAnswers.concat(correctAnswer);
 
   function handleClick(event) {
-    console.log(event)
     if (correctAnswer && event.target.textContent === correctAnswer) {
       setNumOfCorrectAnswers((prev) => prev + 1);
     }
-
-    // if (activeIndex + 1 === numOfQuestions) {
-    //   console.log("finito");
-    // } else {
-    //   setActiveIndex((prev) => prev + 1);
-    // }
   }
 
   return (

@@ -18,10 +18,13 @@ function Form() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
-  // gameOver = false
-  // const activeQuestion = ?
 
-  // tu ide handleGameOver function
+  function handlePlayAgain() {
+    setQuestionsReady(null);
+    setGameOver(false);
+    setActiveIndex(0);
+    setNumOfCorrectAnswers(0);
+  }
 
   function handleClickAnswer() {
     // if (correctAnswer && event.target.textContent === correctAnswer) {
@@ -29,12 +32,10 @@ function Form() {
     // }
 
     if (activeIndex + 1 === numOfQuestions) {
-      console.log("finito");
-      setGameOver(true)
+      setGameOver(true);
     } else {
       setActiveIndex((prev) => prev + 1);
     }
-    // ako sam stigao do kraja, nemoj se povecat nego prikazi modal za GameOver
   }
 
   function handleNumOfQuestionsChange(event) {
@@ -85,6 +86,7 @@ function Form() {
         <GameOver
           numOfQuestions={numOfQuestions}
           numOfCorrectAnswers={numOfCorrectAnswers}
+          handlePlayAgain={handlePlayAgain}
         />
       )}
 

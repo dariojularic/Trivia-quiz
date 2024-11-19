@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import "./GameOver.css";
 import ReactDom from "react-dom";
+import Button from "./Button"
 
 function GameOver(props) {
-  const { numOfCorrectAnswers, numOfQuestions } = props;
+  const { numOfCorrectAnswers, numOfQuestions, handlePlayAgain } = props;
 
   return ReactDom.createPortal(
     <>
@@ -12,8 +13,9 @@ function GameOver(props) {
         <h3 className="game-over-header">Game Over</h3>
         <p>
           You answered {numOfCorrectAnswers} / {numOfQuestions} or{" "}
-          {(numOfCorrectAnswers / numOfQuestions) * 100}%{" "}
+          {((numOfCorrectAnswers / numOfQuestions) * 100).toFixed(2)}%{" "} correctly!
         </p>
+        <Button value="Play again!" type="submit" handleClick={handlePlayAgain}/>
       </div>
     </>,
     document.getElementById("portal")
