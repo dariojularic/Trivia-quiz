@@ -6,6 +6,8 @@ import Label from "./Label";
 import Select from "./Select";
 import Question from "./Question";
 import Loading from "./Loading";
+import GameOver from "./GameOver";
+import { baseUrl, categoryOptions, difficultyOptions } from "./constants";
 
 function Form() {
   const [numOfQuestions, setNumOfQuestions] = useState(10);
@@ -14,30 +16,12 @@ function Form() {
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`;
-  // const baseUrl = `https://opentdb.com/api.php?`; ovaj je basa
-
-  // baseUrl, i konstante prebacit u posebni file constants.js i onda ih importat
-
+  const [gameOver, setGameOver] = useState(false);
+  // gameOver = false
+  // const baseUrl = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`;
   // const activeQuestion = ?
 
-  // state za loading
-  // state za pitanja
-
-  // sta ako ne proslijedim neki prop??
-  // zasto promjena statea kasni i kako rijesit taj problem? useEffect??
-
-  const difficultyOptions = [
-    { id: 1, value: "easy", label: "Easy" },
-    { id: 2, value: "medium", label: "Medium" },
-    { id: 3, value: "hard", label: "Hard" },
-  ];
-  const categoryOptions = [
-    { id: 1, value: "21", label: "Sports" },
-    { id: 2, value: "20", label: "Mithology" },
-    { id: 3, value: "22", label: "Geography" },
-    { id: 4, value: "25", label: "Art" },
-  ];
+  // tu ide handleGameOver function
 
   function handleNumOfQuestionsChange(event) {
     setNumOfQuestions(parseInt(event.target.value));
@@ -57,7 +41,6 @@ function Form() {
     event.preventDefault();
     fetchData()
       .then((data) => {
-        // console.log(data)
         setQuizQuestions(data);
         setQuestionsReady(true);
       })
@@ -69,7 +52,10 @@ function Form() {
   async function fetchData() {
     try {
       setQuestionsReady(false);
-      const response = await fetch(baseUrl);
+      const response = await fetch(
+        baseUrl +
+          `amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`
+      );
       const data = await response.json();
       return data;
     } catch (error) {
@@ -79,10 +65,15 @@ function Form() {
 
   if (questionsReady === false) return <Loading />;
 
-  // jel ovdje ide GameOver komponenta??
-
   return (
     <>
+      {gameOver && (
+        <GameOver
+          numOfQuestions={numOfQuestions}
+          numOfCorrectAnswers={numOfCorrectAnswers}
+        />
+      )}
+
       {!questionsReady ? (
         <div className="gameSetup">
           <h2>Quiz setup</h2>
@@ -90,7 +81,10 @@ function Form() {
           <form
             onSubmit={handleSubmit}
             method="get"
-            action={`https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}`}
+            action={
+              baseUrl +
+              `amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`
+            }
           >
             <div className="num-of-questions-container">
               <Label
