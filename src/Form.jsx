@@ -136,7 +136,8 @@ function Form() {
               />
             </div>
 
-            <Button value="Start playing!" type="submit" />
+            {/* sta ako ovdje Buttonu ne dam funkciju kao argument???  */}
+            <Button value="Start playing!" type="submit"/>
           </form>
         </div>
       ) : (

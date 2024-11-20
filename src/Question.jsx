@@ -49,7 +49,7 @@ function Question(props) {
           })}
         </div>
 
-        <Button value="Next question" type="submit" />
+        <Button value="Next question" type="submit" handleClick={handleClickAnswer}/>
       </div>
     </>
   );
