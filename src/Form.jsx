@@ -27,10 +27,6 @@ function Form() {
   }
 
   function handleClickAnswer() {
-    // if (correctAnswer && event.target.textContent === correctAnswer) {
-    //   setNumOfCorrectAnswers((prev) => prev + 1);
-    // }
-
     if (activeIndex + 1 === numOfQuestions) {
       setGameOver(true);
     } else {
@@ -44,12 +40,10 @@ function Form() {
 
   function handleCategoryChange(event) {
     setCategory(event.target.value);
-    console.log(category);
   }
 
   function handleDifficultyChange(event) {
     setDifficulty(event.target.value);
-    console.log(difficulty);
   }
 
   function handleSubmit(event) {
@@ -137,7 +131,11 @@ function Form() {
             </div>
 
             {/* sta ako ovdje Buttonu ne dam funkciju kao argument???  */}
-            <Button value="Start playing!" type="submit"/>
+            <Button
+              value="Start playing!"
+              type="submit"
+              handleClick={handleSubmit}
+            />
           </form>
         </div>
       ) : (
