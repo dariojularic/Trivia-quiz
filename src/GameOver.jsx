@@ -12,8 +12,15 @@ function GameOver(props) {
       <div className="game-over-container">
         <h3 className="game-over-header">Game Over</h3>
         <p>
-          You answered {numOfCorrectAnswers} / {numOfQuestions} or{" "}
-          {((numOfCorrectAnswers / numOfQuestions) * 100).toFixed(2)}%{" "}
+          You answered{" "}
+          <strong>
+            {numOfCorrectAnswers} / {numOfQuestions}{" "}
+          </strong>
+          or{" "}
+          <strong>
+            {" "}
+            {((numOfCorrectAnswers / numOfQuestions) * 100).toFixed(0)}%
+          </strong>{" "}
           correctly!
         </p>
         <Button
