@@ -1,5 +1,6 @@
 .question-box {
-  height: 480px;
+  /* height: 480px; */
+  height: fit-content;
   width: 640px;
   background-color: white;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
@@ -33,6 +34,3 @@
   display: flex;
   justify-content: end;
 }
-
-
-
