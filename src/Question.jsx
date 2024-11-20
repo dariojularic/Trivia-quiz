@@ -14,6 +14,7 @@ function Question(props) {
   } = props;
   const allAnswers = incorrectAnswers.concat(correctAnswer);
 
+  // ovaj handleClick i handleAnswerClick treba zajedno stavit???
   function handleClick(event) {
     if (correctAnswer && event.target.textContent === correctAnswer) {
       setNumOfCorrectAnswers((prev) => prev + 1);
