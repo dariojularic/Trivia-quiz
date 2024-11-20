@@ -20,6 +20,16 @@ function Question(props) {
     }
   }
 
+  function decodeHtml(html) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
+  function shuffleAnswers(array) {
+    return array.sort(() => 0.5 - Math.random());
+  }
+
   return (
     <>
       <div className="portal"></div>
@@ -31,8 +41,8 @@ function Question(props) {
         </div>
 
         <div className="question-container">
-          <h2 className="question">{question}</h2>
-          {allAnswers.map((answer) => {
+          <h2 className="question">{decodeHtml(question)}</h2>
+          {shuffleAnswers(allAnswers).map((answer) => {
             return (
               <p
                 key={answer}
@@ -43,7 +53,7 @@ function Question(props) {
                   handleClickAnswer(event);
                 }}
               >
-                {answer}
+                {decodeHtml(answer)}
               </p>
             );
           })}
