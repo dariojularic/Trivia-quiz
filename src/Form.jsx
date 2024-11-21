@@ -16,8 +16,12 @@ function Form() {
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // izbrisat state
   const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
+  const currentQuestion = quizQuestions?.results[activeIndex] || null
+  console.log(currentQuestion)
+  const isGameOver = activeIndex + 1 === numOfQuestions
+
 
   function handlePlayAgain() {
     setQuestionsReady(null);
@@ -26,12 +30,14 @@ function Form() {
     setNumOfCorrectAnswers(0);
   }
 
-  function handleClickAnswer() {
-    if (activeIndex + 1 === numOfQuestions) {
-      setGameOver(true);
-    } else {
-      setActiveIndex((prev) => prev + 1);
-    }
+  function handleClickAnswer(isCorrectAnswer) {
+    // if (activeIndex + 1 === numOfQuestions) {
+    //   setGameOver(true);
+    // } else {
+    //   setActiveIndex((prev) => prev + 1);
+    // }
+
+    if (isCorrectAnswer) setNumOfCorrectAnswers((prev) => prev + 1);
   }
 
   function handleNumOfQuestionsChange(event) {
@@ -62,8 +68,7 @@ function Form() {
     try {
       setQuestionsReady(false);
       const response = await fetch(
-        baseUrl +
-          `amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`
+        `${baseUrl}amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`
       );
       const data = await response.json();
       return data;
@@ -130,7 +135,6 @@ function Form() {
               />
             </div>
 
-            {/* sta ako ovdje Buttonu ne dam funkciju kao argument???  */}
             <Button
               value="Start playing!"
               type="submit"
