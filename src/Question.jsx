@@ -10,18 +10,9 @@ function Question(props) {
     activeIndex,
     handleClickAnswer,
     numOfCorrectAnswers,
-    setNumOfCorrectAnswers,
+    // setNumOfCorrectAnswers,
   } = props;
   const allAnswers = incorrectAnswers.concat(correctAnswer);
-
-  // ovaj handleClick i handleAnswerClick treba zajedno stavit???
-
-  //
-  // function handleClick(event) {
-  //   if (event.target.textContent === correctAnswer) {
-  //     setNumOfCorrectAnswers((prev) => prev + 1);
-  //   }
-  // }
 
   function decodeHtml(html) {
     const txt = document.createElement("textarea");
@@ -52,8 +43,8 @@ function Question(props) {
                 className="answer"
                 // zasto ovdje mora ic event kao argument?
                 onClick={(event) => {
-                  // handleClickAnswer(event.target.textContent === correctAnswer);
-                  handleClickAnswer(true);
+                  handleClickAnswer(event.target.textContent === correctAnswer);
+                  // handleClickAnswer(true);
 
                   // handleClick(event);
                 }}

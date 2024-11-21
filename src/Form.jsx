@@ -16,16 +16,14 @@ function Form() {
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [gameOver, setGameOver] = useState(false); // izbrisat state
+  // const [gameOver, setGameOver] = useState(false); // izbrisat state
   const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
-  const currentQuestion = quizQuestions?.results[activeIndex] || null
-  console.log(currentQuestion)
-  const isGameOver = activeIndex + 1 === numOfQuestions
-
+  const currentQuestion = quizQuestions?.results[activeIndex] || null;
+  // console.log(currentQuestion)
+  const isGameOver = activeIndex + 1 === numOfQuestions;
 
   function handlePlayAgain() {
     setQuestionsReady(null);
-    setGameOver(false);
     setActiveIndex(0);
     setNumOfCorrectAnswers(0);
   }
@@ -38,6 +36,7 @@ function Form() {
     // }
 
     if (isCorrectAnswer) setNumOfCorrectAnswers((prev) => prev + 1);
+    setActiveIndex((prev) => prev + 1);
   }
 
   function handleNumOfQuestionsChange(event) {
@@ -81,7 +80,7 @@ function Form() {
 
   return (
     <>
-      {gameOver && (
+      {isGameOver && (
         <GameOver
           numOfQuestions={numOfQuestions}
           numOfCorrectAnswers={numOfCorrectAnswers}
@@ -145,11 +144,9 @@ function Form() {
       ) : (
         <div>
           <Question
-            correctAnswer={quizQuestions.results[activeIndex].correct_answer}
-            incorrectAnswers={
-              quizQuestions.results[activeIndex].incorrect_answers
-            }
-            question={quizQuestions.results[activeIndex].question}
+            correctAnswer={currentQuestion.correct_answer}
+            incorrectAnswers={currentQuestion.incorrect_answers}
+            question={currentQuestion.question}
             setActiveIndex={setActiveIndex}
             activeIndex={activeIndex}
             numOfQuestions={numOfQuestions}
