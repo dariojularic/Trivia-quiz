@@ -10,7 +10,6 @@ function Question(props) {
     activeIndex,
     handleClickAnswer,
     numOfCorrectAnswers,
-    // setNumOfCorrectAnswers,
   } = props;
   const allAnswers = incorrectAnswers.concat(correctAnswer);
 
@@ -41,12 +40,8 @@ function Question(props) {
               <p
                 key={answer}
                 className="answer"
-                // zasto ovdje mora ic event kao argument?
                 onClick={(event) => {
                   handleClickAnswer(event.target.textContent === correctAnswer);
-                  // handleClickAnswer(true);
-
-                  // handleClick(event);
                 }}
               >
                 {decodeHtml(answer)}
