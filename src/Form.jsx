@@ -21,6 +21,7 @@ function Form() {
   const currentQuestion = quizQuestions?.results[activeIndex] || null;
   // console.log(currentQuestion)
   const isGameOver = activeIndex + 1 === numOfQuestions;
+  console.log(isGameOver)
 
   function handlePlayAgain() {
     setQuestionsReady(null);
@@ -144,9 +145,9 @@ function Form() {
       ) : (
         <div>
           <Question
-            correctAnswer={currentQuestion.correct_answer}
-            incorrectAnswers={currentQuestion.incorrect_answers}
-            question={currentQuestion.question}
+            correctAnswer={currentQuestion?.correct_answer}
+            incorrectAnswers={currentQuestion?.incorrect_answers}
+            question={currentQuestion?.question}
             setActiveIndex={setActiveIndex}
             activeIndex={activeIndex}
             numOfQuestions={numOfQuestions}
