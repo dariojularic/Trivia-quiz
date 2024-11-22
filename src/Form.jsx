@@ -21,7 +21,7 @@ function Form() {
   const currentQuestion = quizQuestions?.results[activeIndex] || null;
   // console.log(currentQuestion)
   const isGameOver = activeIndex + 1 === numOfQuestions;
-  console.log(isGameOver)
+  // console.log(isGameOver)
 
   function handlePlayAgain() {
     setQuestionsReady(null);
@@ -35,9 +35,9 @@ function Form() {
     // } else {
     //   setActiveIndex((prev) => prev + 1);
     // }
-
     if (isCorrectAnswer) setNumOfCorrectAnswers((prev) => prev + 1);
-    setActiveIndex((prev) => prev + 1);
+    if (activeIndex + 1 !== numOfQuestions) setActiveIndex((prev) => prev + 1);
+    console.log(isGameOver)
   }
 
   function handleNumOfQuestionsChange(event) {

@@ -53,7 +53,9 @@ function Question(props) {
         <Button
           value="Next question"
           type="submit"
-          handleClick={handleClickAnswer}
+          handleClick={(event) => {
+            handleClickAnswer(event.target.textContent === correctAnswer);
+          }}
         />
       </div>
     </>
