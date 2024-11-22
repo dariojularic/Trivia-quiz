@@ -7,6 +7,7 @@ function App() {
     <>
       <Header />
       <main>
+        <div id="portal"></div>
         <Form />
       </main>
     </>

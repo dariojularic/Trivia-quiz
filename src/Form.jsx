@@ -16,12 +16,10 @@ function Form() {
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [questionsReady, setQuestionsReady] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  // const [gameOver, setGameOver] = useState(false); // izbrisat state
   const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0);
+
   const currentQuestion = quizQuestions?.results[activeIndex] || null;
-  // console.log(currentQuestion)
-  const isGameOver = activeIndex + 1 === numOfQuestions;
-  // console.log(isGameOver)
+  const isGameOver = activeIndex === numOfQuestions;
 
   function handlePlayAgain() {
     setQuestionsReady(null);
@@ -30,14 +28,8 @@ function Form() {
   }
 
   function handleClickAnswer(isCorrectAnswer) {
-    // if (activeIndex + 1 === numOfQuestions) {
-    //   setGameOver(true);
-    // } else {
-    //   setActiveIndex((prev) => prev + 1);
-    // }
     if (isCorrectAnswer) setNumOfCorrectAnswers((prev) => prev + 1);
-    if (activeIndex + 1 !== numOfQuestions) setActiveIndex((prev) => prev + 1);
-    console.log(isGameOver)
+    setActiveIndex((prev) => prev + 1);
   }
 
   function handleNumOfQuestionsChange(event) {
@@ -79,16 +71,18 @@ function Form() {
 
   if (questionsReady === false) return <Loading />;
 
+  if (isGameOver) {
+    return (
+      <GameOver
+        numOfQuestions={numOfQuestions}
+        numOfCorrectAnswers={numOfCorrectAnswers}
+        handlePlayAgain={handlePlayAgain}
+      />
+    );
+  }
+
   return (
     <>
-      {isGameOver && (
-        <GameOver
-          numOfQuestions={numOfQuestions}
-          numOfCorrectAnswers={numOfCorrectAnswers}
-          handlePlayAgain={handlePlayAgain}
-        />
-      )}
-
       {!questionsReady ? (
         <div className="gameSetup">
           <h2>Quiz setup</h2>
@@ -143,19 +137,17 @@ function Form() {
           </form>
         </div>
       ) : (
-        <div>
-          <Question
-            correctAnswer={currentQuestion?.correct_answer}
-            incorrectAnswers={currentQuestion?.incorrect_answers}
-            question={currentQuestion?.question}
-            setActiveIndex={setActiveIndex}
-            activeIndex={activeIndex}
-            numOfQuestions={numOfQuestions}
-            handleClickAnswer={handleClickAnswer}
-            numOfCorrectAnswers={numOfCorrectAnswers}
-            setNumOfCorrectAnswers={setNumOfCorrectAnswers}
-          />
-        </div>
+        <Question
+          correctAnswer={currentQuestion?.correct_answer}
+          incorrectAnswers={currentQuestion?.incorrect_answers}
+          question={currentQuestion?.question}
+          setActiveIndex={setActiveIndex}
+          activeIndex={activeIndex}
+          numOfQuestions={numOfQuestions}
+          handleClickAnswer={handleClickAnswer}
+          numOfCorrectAnswers={numOfCorrectAnswers}
+          setNumOfCorrectAnswers={setNumOfCorrectAnswers}
+        />
       )}
     </>
   );

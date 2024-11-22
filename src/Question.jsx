@@ -25,7 +25,6 @@ function Question(props) {
 
   return (
     <>
-      <div className="portal"></div>
       <div className="question-box">
         <div className="number-of-answers">
           <p>
@@ -65,12 +64,9 @@ function Question(props) {
 Question.propTypes = {
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.array,
-  numOfQuestions: PropTypes.number,
   question: PropTypes.string,
   activeIndex: PropTypes.number,
-  setActiveIndex: PropTypes.func,
   numOfCorrectAnswers: PropTypes.number,
-  setNumOfCorrectAnswers: PropTypes.func,
   handleClickAnswer: PropTypes.func,
 };
 
